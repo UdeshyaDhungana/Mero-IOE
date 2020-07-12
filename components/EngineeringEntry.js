@@ -1,32 +1,49 @@
 import React from 'react'
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native'
 import AntDesign from '@expo/vector-icons/AntDesign'
 
-function EngineeringEntry({engineering}){
+//constants
+const borderRadius = 12;
+
+function EngineeringEntry({engineering, image}){
 	return (
-		<TouchableOpacity style={styles.viewStyle}>
-			<View style={styles.textContainer}>
-				<Text style={styles.textStyle}>
-					{engineering}
-				</Text>
-				<AntDesign style={styles.icon} name="rightcircle" />
+		<TouchableOpacity style={styles.touchableOpacity}>
+			<ImageBackground source={image} style={styles.backgroundImage}>
+			<View style={styles.wrapper}>
+				<View style={styles.textContainer}>
+					<Text style={styles.textStyle}>
+						{engineering}
+					</Text>
+					<AntDesign style={styles.icon} name="rightcircle" />
+				</View>
 			</View>
+			</ImageBackground>
 		</TouchableOpacity>
 	);
 }
 
 let styles = StyleSheet.create({
-	viewStyle: {
-		width: "93%",
-		alignSelf: "center",
-		height: 85,
-		flexDirection: "row",
-		justifyContent: 'flex-end',
-		alignItems: "flex-end",
+	touchableOpacity: {
+		overflow: "hidden",
+		height: 75,
+		width: "95%",
 		marginVertical: 20,
-		borderRadius: 12,
-		borderColor: "black",
-		borderWidth: 1,
+		borderRadius,
+		elevation: 5,
+	},
+	wrapper: {
+		//make a wrapper identical to parent, ie touchableOpacity
+		height: "100%",
+		width: "100%",
+		alignSelf: "center",
+		flexDirection: "row",
+		justifyContent: "flex-end",
+		alignItems: "flex-end",
+	},
+	backgroundImage: {
+		width: "100%",
+		height: "100%",
+		opacity: 0.9,
 	},
 	textContainer: {
 		flexDirection: "row",
@@ -38,7 +55,13 @@ let styles = StyleSheet.create({
 	textStyle: {
 		marginRight: 7,
 		fontWeight: "bold",
-		fontSize: 18,
+		fontSize: 22,
+		color: "#ffffff",
+		textShadowColor: "#000",
+		textShadowRadius: 5,
+	},
+	icon: {
+		color: "#ffffff",
 	}
 })
 

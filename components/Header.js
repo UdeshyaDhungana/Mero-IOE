@@ -17,8 +17,7 @@ let styles = StyleSheet.create({
 		color: "#1583F9",
 		fontSize: 24,
 		fontWeight: "bold",
-		fontFamily: "Roboto",
-		textAlign: "center",
+		marginLeft: "6%",
 		paddingTop: 50,
 		paddingBottom: 10,
 	}

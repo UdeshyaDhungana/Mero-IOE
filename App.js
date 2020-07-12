@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native'
+import {TouchableOpacity} from 'react-native'
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native'
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 import Ionicons from '@expo/vector-icons/Ionicons'
@@ -13,7 +13,7 @@ const Tab = createBottomTabNavigator();
 
 export default function App() {
 	return (
-		<NavigationContainer theme={navigatorTheme}>
+		<NavigationContainer>
 			<Tab.Navigator
 				screenOptions={({ route }) => ({
 					tabBarIcon: ({ focused, color, size }) => {
@@ -36,17 +36,10 @@ export default function App() {
 					inactiveTintColor: 'gray',
 				}}
 			>
-				<Tab.Screen name="Home" component={HomeScreen} />
-				<Tab.Screen name="About" component={AboutScreen} />
+					<Tab.Screen name="Home" component={HomeScreen} />
+					<Tab.Screen name="About" component={AboutScreen} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
 }
 
-const navigatorTheme = {
-  ...DefaultTheme,
-  colors: {
-    ...DefaultTheme.colors,
-    primary: 'rgb(255, 45, 85)',
-  },
-};
