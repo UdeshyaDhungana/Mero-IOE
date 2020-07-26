@@ -19,7 +19,6 @@ let styles = StyleSheet.create({
     backgroundColor: "#eee",
   },
   headerText: {
-    textAlign: "center",
     color: "#000",
     fontSize: 24,
     fontWeight: "bold",

@@ -1,5 +1,6 @@
 import React from 'react'
 import {View, ScrollView, StyleSheet} from 'react-native'
+import Header from '../components/Header'
 
 //components
 import EngineeringEntry from '../components/EngineeringEntry'
@@ -21,6 +22,7 @@ const automobile = require('../assets/HomeScreenImages/automobile.jpg');
 export default function HomeScreen(){
 	return (
 		<View style={styles.app}>
+      <Header text={"Home"} />
 			<ScrollView>
 				<View style={styles.wrapper}>
 					<EngineeringEntry engineering={"Civil"} image={civil} />

@@ -1,11 +1,11 @@
 import React from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, ImageBackground} from 'react-native'
-import AntDesign from '@expo/vector-icons/AntDesign'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 //constants
 const borderRadius = 12;
 
-function EngineeringEntry({engineering, image}){
+function EngineeringEntry({engineering, image}:{engineering: string, image:any}){
 	return (
 		<TouchableOpacity style={styles.touchableOpacity}>
 			<ImageBackground source={image} style={styles.backgroundImage}>
@@ -14,7 +14,7 @@ function EngineeringEntry({engineering, image}){
 					<Text style={styles.textStyle}>
 						{engineering}
 					</Text>
-					<AntDesign style={styles.icon} name="rightcircle" />
+          <MaterialCommunityIcons style={styles.icon} name="arrow-right-bold-circle" />
 				</View>
 			</View>
 			</ImageBackground>
