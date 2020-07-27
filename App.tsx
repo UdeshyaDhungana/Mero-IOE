@@ -3,13 +3,13 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {NavigationContainer} from '@react-navigation/native'
 
-
 const Tab = createMaterialBottomTabNavigator();
 
 //components
-import HomeScreen from './Screens/HomeScreen'
-import AboutScreen from './Screens/AboutScreen'
-import FinanceScreen from './Screens/FinanceScreen'
+import HomeTab from './Tabs/HomeTab'
+import AboutTab from './Tabs/AboutTab'
+import FinanceTab from './Tabs/FinanceTab'
+
 
 function Tabs() {
   return (
@@ -26,7 +26,7 @@ function Tabs() {
               <MaterialCommunityIcons name="home" color={color} size={24} />
             ),
           }}
-          component={HomeScreen} />
+          component={HomeTab} />
 
         <Tab.Screen
           name="Finance"
@@ -36,7 +36,7 @@ function Tabs() {
               <MaterialCommunityIcons name="wallet" color={color} size={24} />
             ),
           }}
-          component={FinanceScreen} />
+          component={FinanceTab} />
         <Tab.Screen
           name="About"
           options={{
@@ -45,7 +45,7 @@ function Tabs() {
               <MaterialCommunityIcons name="information" color={color} size={24} />
             ),
           }}
-          component={AboutScreen} />
+          component={AboutTab} />
 
       </Tab.Navigator>
     </NavigationContainer>
