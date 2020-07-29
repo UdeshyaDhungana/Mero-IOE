@@ -2,9 +2,10 @@ import React from 'react'
 import {View, ScrollView, StyleSheet} from 'react-native'
 import Header from '../components/Header'
 
-//components
+/* components */
 import EngineeringEntry from '../components/EngineeringEntry'
-//images
+
+/* images */
 const civil = require('../assets/HomeScreenImages/civil.jpg');
 const computer = require('../assets/HomeScreenImages/computer.jpg');
 const electrical = require('../assets/HomeScreenImages/electrical.jpg');
@@ -18,7 +19,7 @@ const geomatics = require('../assets/HomeScreenImages/geomatics.jpg');
 const chemical = require('../assets/HomeScreenImages/chemical.jpg');
 const automobile = require('../assets/HomeScreenImages/automobile.jpg');
 
-
+/* Home Screen Component */
 export default function HomeScreen(){
 	return (
 		<View style={styles.app}>

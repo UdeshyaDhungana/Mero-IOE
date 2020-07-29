@@ -10,7 +10,6 @@ import HomeTab from './Tabs/HomeTab'
 import AboutTab from './Tabs/AboutTab'
 import FinanceTab from './Tabs/FinanceTab'
 
-
 function Tabs() {
   return (
     <NavigationContainer>
@@ -54,8 +53,6 @@ function Tabs() {
 
 export default function App() {
   return (
-    <>
-      <Tabs />
-    </>
+    <Tabs />
   );
 }
