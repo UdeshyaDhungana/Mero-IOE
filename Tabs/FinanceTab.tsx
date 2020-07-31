@@ -1,4 +1,5 @@
 import React from 'react'
+import {YellowBox} from 'react-native'
 import { createStackNavigator } from '@react-navigation/stack'
 /* Import screens */
 import FinanceDetails from '../Screens/FinanceDetails'
@@ -24,3 +25,13 @@ export default function FinanceTab (){
     </FinanceTabStack.Navigator>
   );
 }
+
+/*
+ * State persistance, or deep links are not used, so we can ignore the
+ * "Non-serializable values were found in the navigation state,
+ * which can break usage such as persisting and restoring state." warning
+ * */
+
+YellowBox.ignoreWarnings([
+  'Non-serializable values were found in the navigation state',
+]);
