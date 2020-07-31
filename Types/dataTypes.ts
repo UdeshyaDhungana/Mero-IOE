@@ -8,6 +8,12 @@ export type Expenses = {
   "personal": number,
 }
 
+/* This function is used to update the state of details page via form
+    - Used by FinanceDetails.tsx
+* */
+export type updaterFunction = (increment:Expenses) => void;
+
+/* Cheated a little here, this is not type, but a value 😁 */
 export const emptyExpenses:Expenses = {
   "food": 0,
   "rent": 0,
@@ -17,3 +23,4 @@ export const emptyExpenses:Expenses = {
   "entertainment": 0,
   "personal": 0,
 }
+

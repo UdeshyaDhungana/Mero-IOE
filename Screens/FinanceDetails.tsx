@@ -3,14 +3,20 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
 /* Types */
 import {Expenses,emptyExpenses} from '../Types/dataTypes'
+import { StackNavigationProp} from '@react-navigation/stack'
+import {FinanceTabParamsList} from '../Tabs/FinanceTab'
+import {updaterFunction} from '../Types/dataTypes'
 /* Components */
 import { AntDesign } from '@expo/vector-icons';
 import PieChart from '../components/PieChart'
 
+/* TYPE CHECKING */
 /* Interfaces required in finance tab */
 type dataFromStorage = string | null;
-interface Props {
-  navigation: string
+/* Screens */
+type DetailsScreenProp = StackNavigationProp<FinanceTabParamsList,"Details">
+type Props = {
+  navigation: DetailsScreenProp,
 }
 
 /* Get key, I've used year-month as key value for local Storage */
@@ -20,15 +26,25 @@ function getKey():string{
 }
 
 /* Floating action button */
-export const FloatingActionButton = ({name}:{name:string}) => {
+export const FloatingActionButton = (
+  {name,navigation, updateExpenses}
+    :{name:string,navigation:DetailsScreenProp, updateExpenses:updaterFunction}
+) => {
   return (
-    <TouchableOpacity style={styles.floatingActionButton}>
+    <TouchableOpacity
+      style={styles.floatingActionButton}
+      onPress={() => {
+        navigation.navigate("Add Expenses", {
+          updateExpenses,
+        });
+      }}
+    >
       <AntDesign name={name} size={24} />
     </TouchableOpacity>
   );
 }
 
-/* Component in finance tab that displays this month's data */
+/* Component in finnce tab that displays this month's data */
 /* TODO: 
  * 1. Type checking for props and state
  * 2. Button opens new screen
@@ -81,7 +97,7 @@ export default class Details extends React.Component<Props, Expenses>{
   /* update state after providing incremental values
      This function is called by <Form /> component which is it's child
    */
-  async updateState(increment:Expenses){
+  updateStateViaForm = async(increment:Expenses) => {
     let ownState:Expenses = this.state;
     let result:Expenses = emptyExpenses;
 
@@ -90,7 +106,6 @@ export default class Details extends React.Component<Props, Expenses>{
       let fk:keyof Expenses = key as keyof Expenses;
       result[fk]  = ownState[fk] + increment[fk];
     });
-
     await this.saveToStorage(result);
     this.setState(result);
   }
@@ -113,7 +128,10 @@ export default class Details extends React.Component<Props, Expenses>{
         <PieChart
           data={this.state}
         />
-        <FloatingActionButton name="plus" />
+        <FloatingActionButton
+          navigation={this.props.navigation}
+          updateExpenses={this.updateStateViaForm}
+          name="plus" />
       </View>
     );
   }
