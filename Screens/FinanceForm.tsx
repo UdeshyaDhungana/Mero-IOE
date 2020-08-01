@@ -1,16 +1,20 @@
 import React from 'react'
 import { ScrollView, Text, View, StyleSheet } from 'react-native'
 import { TextInput, Button } from 'react-native-paper'
+import capitilize from '../Utilities/capitalize'
 /* Import types */
 import {RouteProp} from '@react-navigation/native'
 import {FinanceTabParamsList} from '../Tabs/FinanceTab'
-import {Expenses} from '../Types/dataTypes'
+import { StackNavigationProp} from '@react-navigation/stack'
+import {Expenses} from '../Utilities/dataTypes'
 
 /* Type checking */
 type formScreenRouteProp = RouteProp<FinanceTabParamsList, "Add Expenses">
+type formScreenNavProp = StackNavigationProp<FinanceTabParamsList,"Add Expenses">
 
 type Props = {
   route: formScreenRouteProp,
+  navigation: formScreenNavProp,
 }
 
 type FormState = Expenses;
@@ -22,8 +26,6 @@ const theme = {colors: {
 
 
 /* TODO 
- * New styled form
- * Get parent's state as route parameter, update state while going back
  */
 export default class FinanceForm extends React.Component<Props,FormState>{
   constructor(props:Props){
@@ -48,7 +50,7 @@ export default class FinanceForm extends React.Component<Props,FormState>{
       >
         <View style={styles.formChild}>
           <Text style={styles.text}>
-            {expenseType[0].toUpperCase()+expenseType.slice(1)}
+            {capitilize(expenseType)}
           </Text>
         </View>
         {/* Value: numeric keyboard */}
@@ -61,8 +63,8 @@ export default class FinanceForm extends React.Component<Props,FormState>{
           onChangeText={(value:string) => {
             /* If the value is number, then only change state */
             /* Additional Number() casting has been done due to typescript */
-            if (!isNaN(Number(value)) && value.length > 0){
-              state[expenseType as keyof Expenses] = parseInt(value);
+            if (!isNaN(Number(value))){
+              state[expenseType as keyof Expenses] = parseInt(value) || Number(value);
               this.setState(state);
             }
           }}
@@ -71,18 +73,20 @@ export default class FinanceForm extends React.Component<Props,FormState>{
     ));
 
     return (
-      <ScrollView>
+      <ScrollView style={styles.view}>
         {formBody}
         <Button
           mode="contained"
-          icon={"wallet-plus"}
+          icon={"check"}
           style={styles.button}
           theme={theme}
           onPress={() => {
-            console.log("Hello, world");
+            /* Update state of parent component */
+            this.props.route.params.updateExpenses(this.state);
+            this.props.navigation.goBack();
           }}
         >
-          Add
+          Done
         </Button>
       </ScrollView>
     );
@@ -90,6 +94,9 @@ export default class FinanceForm extends React.Component<Props,FormState>{
 }
 
 const styles = StyleSheet.create({
+  view: {
+    paddingTop: 10,
+  },
   formGroup: {
     flexDirection: "row",
     justifyContent: "space-around",
@@ -98,9 +105,9 @@ const styles = StyleSheet.create({
   },
   formChild: {
     width: "40%",
-    justifyContent: "flex-end",
-    padding: 10,
-    height: 50,
+    justifyContent: "center",
+    height: 40,
+    padding: 5,
   },
   text: {
     fontSize: 16,
@@ -108,8 +115,7 @@ const styles = StyleSheet.create({
   },
   button: {
     elevation: 4,
-    marginTop: 20,
+    marginTop: 40,
     alignSelf: "center",
-    alignItems: "flex-end",
   }
 })

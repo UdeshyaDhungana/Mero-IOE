@@ -18,6 +18,7 @@
     "@types/react": "^16.9.43",
     "@types/react-dom": "^16.9.8",
     "@types/react-native": "^0.63.2",
+    "@types/react-native-svg-charts": "^5.0.3",
     "@types/yup": "^0.29.3",
     "expo": "~38.0.8",
     "expo-status-bar": "^1.0.2",
@@ -31,10 +32,12 @@
     "react-native-reanimated": "~1.9.0",
     "react-native-safe-area-context": "~3.0.7",
     "react-native-screens": "~2.9.0",
+    "react-native-svg-charts": "^5.4.0",
     "react-native-vector-icons": "^7.0.0",
     "react-native-web": "~0.11.7",
     "typescript": "^3.9.7",
-    "yup": "^0.29.2"
+    "yup": "^0.29.2",
+    "react-native-svg": "12.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.6",

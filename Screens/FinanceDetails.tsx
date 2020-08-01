@@ -1,14 +1,14 @@
 import React from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, ScrollView, StyleSheet, TouchableOpacity } from 'react-native'
 import AsyncStorage from '@react-native-community/async-storage';
-/* Types */
-import {Expenses,emptyExpenses} from '../Types/dataTypes'
-import { StackNavigationProp} from '@react-navigation/stack'
-import {FinanceTabParamsList} from '../Tabs/FinanceTab'
-import {updaterFunction} from '../Types/dataTypes'
 /* Components */
 import { AntDesign } from '@expo/vector-icons';
-import PieChart from '../components/PieChart'
+import OurPieChart from '../components/OurPieChart'
+/* Types */
+import {Expenses,emptyExpenses} from '../Utilities/dataTypes'
+import { StackNavigationProp} from '@react-navigation/stack'
+import {FinanceTabParamsList} from '../Tabs/FinanceTab'
+import {updaterFunction} from '../Utilities/dataTypes'
 
 /* TYPE CHECKING */
 /* Interfaces required in finance tab */
@@ -34,7 +34,7 @@ export const FloatingActionButton = (
     <TouchableOpacity
       style={styles.floatingActionButton}
       onPress={() => {
-        navigation.navigate("Add Expenses", {
+        navigation.push("Add Expenses", {
           updateExpenses,
         });
       }}
@@ -46,8 +46,7 @@ export const FloatingActionButton = (
 
 /* Component in finnce tab that displays this month's data */
 /* TODO: 
- * 1. Type checking for props and state
- * 2. Button opens new screen
+ * Pie chart implementation
  *
  */
 export default class Details extends React.Component<Props, Expenses>{
@@ -81,7 +80,6 @@ export default class Details extends React.Component<Props, Expenses>{
       return emptyExpenses;
     }
   }
-
 
   /* save provided data to localstorage */
   saveToStorage = async(data:Expenses) => {
@@ -124,15 +122,15 @@ export default class Details extends React.Component<Props, Expenses>{
   render(){
     //form
     return (
-      <View style={styles.view}>
-        <PieChart
+      <ScrollView style={styles.view}>
+        <OurPieChart
           data={this.state}
         />
         <FloatingActionButton
           navigation={this.props.navigation}
           updateExpenses={this.updateStateViaForm}
           name="plus" />
-      </View>
+      </ScrollView>
     );
   }
 }
@@ -143,16 +141,15 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 12,
     backgroundColor: "#eee",
-    flex: 1,
   },
   floatingActionButton: {
-    position: "absolute",
-    bottom: 25,
-    right: 25,
     width: 60,
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "flex-end",
+    marginRight: 30,
     height: 60,
+    marginVertical: 20,
     borderRadius: 30,
     backgroundColor: "#fff",
     elevation: 5

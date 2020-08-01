@@ -5,7 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 import FinanceDetails from '../Screens/FinanceDetails'
 import FinanceForm from '../Screens/FinanceForm'
 /* IMport types */
-import {updaterFunction} from '../Types/dataTypes'
+import {updaterFunction} from '../Utilities/dataTypes'
 
 /* Type checking */
 export type FinanceTabParamsList = {
