@@ -3,6 +3,12 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
 import {NavigationContainer} from '@react-navigation/native'
 
+/*
+ * TODO
+ * Screen push direction: horizontal
+ * Home Screen: Learning Screen
+ */
+
 const Tab = createMaterialBottomTabNavigator();
 
 //components
